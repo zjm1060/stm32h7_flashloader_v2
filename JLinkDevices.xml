@@ -1,0 +1,6 @@
+<Database>
+  <Device>
+   <ChipInfo Vendor="ST" Name="STM32F205RC" Core="JLINK_CORE_CORTEX_M3" />
+   <FlashBankInfo Name="Internes Flash" BaseAddr="0x08000000" MaxSize="0x00040000" Loader="ST_STM32F205RC.elf" LoaderType="FLASH_ALGO_TYPE_OPEN" />
+  </Device>
+</Database>
