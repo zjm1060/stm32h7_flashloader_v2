@@ -235,3 +235,25 @@ u8 QSPI_Transmit(u8 *buf, u32 datalen)
     return status;
 }
 
+void QSPI_MMAP(void)
+{
+    u32 tempreg;
+
+    tempreg = OCTOSPI1->CR;
+    tempreg &= ~(3 << 28); 
+    tempreg |= (3 << 28);
+    OCTOSPI1->CR = tempreg; 
+    tempreg = (3 << 24);
+    tempreg |= (2 << 12);
+    tempreg |= (1 << 8);
+    tempreg |= (1 << 0);
+    OCTOSPI1->CCR = tempreg;
+    OCTOSPI1->IR = 0x6b;
+    OCTOSPI1->TCR = 8;
+}
+
+void QSPI_Abort(void)
+{
+    OCTOSPI1->CR |= (1 << 1);
+    while((OCTOSPI1->SR & (1 << 5)));
+}

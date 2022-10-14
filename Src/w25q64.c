@@ -54,6 +54,7 @@ void W25QXX_Write(uint8_t *pData, uint32_t WriteAddr, uint32_t NumByteToWrite)
     u16 pageremain;
     pageremain = 256 - WriteAddr % 256; //单页剩余的字节数
     if(NumByteToWrite <= pageremain)pageremain = NumByteToWrite; //不大于256个字节
+    QSPI_Abort();
     while(1)
     {
         W25QXX_Write_Page(pData, WriteAddr, pageremain);
@@ -72,6 +73,7 @@ void W25QXX_Write(uint8_t *pData, uint32_t WriteAddr, uint32_t NumByteToWrite)
 
 void W25QXX_EraseSector(uint32_t SectorAddress)
 {
+    QSPI_Abort();
     /* 写使能 */
     W25QXX_WriteEnable();
     /* 发送命令 */
@@ -83,6 +85,7 @@ void W25QXX_EraseSector(uint32_t SectorAddress)
 
 void W25QXX_EraseFullChip(void)
 {
+    QSPI_Abort();
     /* 写使能 */
     W25QXX_WriteEnable();
 

@@ -79,6 +79,7 @@ int Init(U32 Addr, U32 Freq, U32 Func) {
 
   ID = W25QXX_ReadId();
 
+  QSPI_MMAP();
 
   //qspi_mmap();
 
@@ -130,6 +131,8 @@ int EraseSector(U32 SectorAddr) {
         W25QXX_EraseSector(SectorAddr);
 
 	//qspi_mmap();
+        QSPI_MMAP();
+        
 
 	return 0;
 }
@@ -174,6 +177,7 @@ int ProgramPage(U32 DestAddr, U32 NumBytes, U8 *pSrcBuff) {
 	//qspi_write(DestAddr, pSrcBuff, NumBytes);
         W25QXX_Write(pSrcBuff, DestAddr, NumBytes);
 	//qspi_mmap();
+        QSPI_MMAP();
 
 	return 0;
 }
